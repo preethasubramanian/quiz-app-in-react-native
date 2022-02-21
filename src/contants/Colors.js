@@ -1,0 +1,7 @@
+export default {
+PRIMARY_COLOR: '#F2994A',
+BLACK:'#000000',
+WHITE:'#FFFFFF',
+LITTLE_GREEN: '#56EC15',
+GRAY: '#EAECEE' ,
+};

@@ -1,0 +1,48 @@
+{
+  "name": "AppDemo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-native-community/progress-bar-android": "^1.0.4",
+    "@react-native-masked-view/masked-view": "^0.2.6",
+    "@react-navigation/native": "^6.0.7",
+    "@react-navigation/stack": "^6.1.0",
+    "axios": "^0.25.0",
+    "lifecycle": "^1.0.4",
+    "lottie-react-native": "^5.0.1",
+    "react": "17.0.2",
+    "react-countdown": "^2.3.2",
+    "react-native": "0.67.1",
+    "react-native-gesture-handler": "^2.2.0",
+    "react-native-progress": "^5.0.0",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.10.2",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/runtime": "^7.16.7",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "babel-jest": "^27.4.6",
+    "eslint": "^8.8.0",
+    "jest": "^27.4.7",
+    "metro-react-native-babel-preset": "^0.67.0",
+    "react-native-paper": "^4.11.2",
+    "react-test-renderer": "17.0.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "projectConfig": {
+    "backendApiBaseUrl": "https://opentdb.com/"
+  }
+}
