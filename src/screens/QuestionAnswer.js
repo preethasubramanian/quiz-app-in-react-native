@@ -38,9 +38,13 @@ const QuestionAnswer = ({navigation}) => {
          setIsActive(true);
         dispatch(GeneralAction.do_Quiz(question));
         setData(question)
+
+        if(Userdata!='')
+        {
+
        setShowActivityIndicator(false);
 
-      
+        }
     }, []);
  
 
