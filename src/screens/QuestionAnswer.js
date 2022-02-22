@@ -39,12 +39,11 @@ const QuestionAnswer = ({navigation}) => {
         dispatch(GeneralAction.do_Quiz(question));
         setData(question)
 
-        if(Userdata!='')
-        {
+     
 
        setShowActivityIndicator(false);
 
-        }
+      
     }, []);
  
 
