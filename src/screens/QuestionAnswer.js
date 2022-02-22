@@ -16,6 +16,9 @@ const QuestionAnswer = ({navigation}) => {
     const question= useSelector(state => state?.generalState?.question);
     const dispatch = useDispatch();
 
+    const [Userdata, setData] = useState([]);
+    const allQuestions = Userdata;
+    
 
 
     const [seconds, setSeconds] = useState(0);
@@ -28,24 +31,26 @@ const QuestionAnswer = ({navigation}) => {
     const [showNextButton, setShowNextButton] = useState(false);
     const [showActivityIndicator,setShowActivityIndicator ] = useState(true);
 
- 
+   //mounted
+   useEffect(() => handleComponentMounted(), []);
 
-    const [Userdata, setData] = useState([]);
-    const allQuestions = Userdata;
+   const handleComponentMounted = () => {
+    setIsActive(true);
+    dispatch(GeneralAction.do_Quiz(question));
+    setData(question)
+    setShowActivityIndicator(false);
+
+   };
+
     
-    useEffect(() => {
+    // useEffect(() => {
      
-         setIsActive(true);
-        dispatch(GeneralAction.do_Quiz(question));
-        setData(question)
+    //      setIsActive(true);
+    //     dispatch(GeneralAction.do_Quiz(question));
+    //     setData(question)
+    //   setShowActivityIndicator(false);
 
-        if(Userdata!='')
-        {
-
-       setShowActivityIndicator(false);
-
-        }
-    }, []);
+    //  }, []);
  
 
     const validateAnswer = () => {

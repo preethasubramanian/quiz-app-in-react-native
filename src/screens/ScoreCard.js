@@ -84,7 +84,7 @@ const styles = StyleSheet.create(
             color: Colors.BLACK,
             textAlign: 'center',
             fontFamily: Fonts.Nunito_ExtraBold,
-            fontSize: 25,
+            fontSize: 25   ,
             fontWeight: "bold",
 
         },

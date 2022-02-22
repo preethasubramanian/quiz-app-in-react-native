@@ -13,6 +13,7 @@
     "@react-native-community/progress-bar-android": "^1.0.4",
     "@react-native-masked-view/masked-view": "^0.2.6",
     "@react-navigation/native": "^6.0.7",
+    "@react-navigation/native-stack": "^6.5.0",
     "@react-navigation/stack": "^6.1.0",
     "axios": "^0.25.0",
     "lifecycle": "^1.0.4",
