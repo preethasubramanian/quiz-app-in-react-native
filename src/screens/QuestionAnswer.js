@@ -17,11 +17,13 @@ const QuestionAnswer = ({navigation}) => {
     const dispatch = useDispatch();
 
     const [Userdata, setData] = useState([]);
+
+ 
     const allQuestions = Userdata;
     
 
 
-    const [seconds, setSeconds] = useState(0);
+    const [seconds, setSeconds] = useState(60);
     const [isActive, setIsActive] = useState(true);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -65,7 +67,7 @@ const QuestionAnswer = ({navigation}) => {
       }
     
       function reset() {
-        setSeconds(0);
+        setSeconds(60);
         setIsActive(false);
       }
     
@@ -74,16 +76,17 @@ const QuestionAnswer = ({navigation}) => {
      
         if (isActive) {
           interval = setInterval(() => {
-            setSeconds(seconds => seconds + 1);
+            setSeconds(seconds => seconds - 1);
 
 
-            if(seconds==60)
+            if(seconds == 0)
              {
  
                 dispatch(GeneralAction.setQuizScore(score-10));
                 handleNext  () 
                 reset()
                 setIsActive(true);
+                
              }
           
           }, 1000);
@@ -120,7 +123,7 @@ const QuestionAnswer = ({navigation}) => {
          
             toggle() ;
             setIsActive(true);
-            setSeconds(0);
+            setSeconds(60);
 
 
             setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -141,7 +144,7 @@ const renderOptions = () => {
     <TouchableOpacity style={styles.button}
                     onPress={() => validateAnswer()}
                     disabled={isOptionsDisabled} >
-                    <Text style={styles.buttontext}>{allQuestions[currentQuestionIndex]?.correct_answer} </Text>
+                    <Text style={styles.buttontext}>{allQuestions[currentQuestionIndex]?.correct_answer.replace(/&quot;/g, '\\"')} </Text>
 
                 </TouchableOpacity>
                 {
@@ -151,7 +154,7 @@ const renderOptions = () => {
                             disabled={isOptionsDisabled}
                             key={incorrect_answers}
                              style={styles.button}>
-                            <Text style={styles.buttontext}>{incorrect_answers}</Text>
+                            <Text style={styles.buttontext}>{incorrect_answers.replace(/&quot;/g, '\\"')}</Text>
                        </TouchableOpacity>
                     ))
                 }
@@ -204,7 +207,7 @@ const renderOptions = () => {
 
                         <Text> {allQuestions[currentQuestionIndex]?.category}</Text>
 
-                        <Text style={styles.questText}>{allQuestions[currentQuestionIndex]?.question}</Text>
+                        <Text style={styles.questText}>{allQuestions[currentQuestionIndex]?.question.replace(/&quot;/g, '\\"',)}</Text>
                        
                          
                      
