@@ -144,7 +144,7 @@ const renderOptions = () => {
     <TouchableOpacity style={styles.button}
                     onPress={() => validateAnswer()}
                     disabled={isOptionsDisabled} >
-                    <Text style={styles.buttontext}>{allQuestions[currentQuestionIndex]?.correct_answer.replace(/&quot;/g, '\\"')} </Text>
+                    <Text style={styles.buttontext}>{allQuestions[currentQuestionIndex]?.correct_answer.replace(/&quot;/g, '"',/["']/g, "")} </Text>
 
                 </TouchableOpacity>
                 {
@@ -154,7 +154,7 @@ const renderOptions = () => {
                             disabled={isOptionsDisabled}
                             key={incorrect_answers}
                              style={styles.button}>
-                            <Text style={styles.buttontext}>{incorrect_answers.replace(/&quot;/g, '\\"')}</Text>
+                            <Text style={styles.buttontext}>{incorrect_answers.replace(/&quot;/g, '"',/["']/g, "")}</Text>
                        </TouchableOpacity>
                     ))
                 }
@@ -207,7 +207,7 @@ const renderOptions = () => {
 
                         <Text> {allQuestions[currentQuestionIndex]?.category}</Text>
 
-                        <Text style={styles.questText}>{allQuestions[currentQuestionIndex]?.question.replace(/&quot;/g, '\\"',)}</Text>
+                        <Text style={styles.questText}>{allQuestions[currentQuestionIndex]?.question.replace(/&quot;/g, '"',/["']/g, "")}</Text>
                        
                          
                      
