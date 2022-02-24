@@ -65,7 +65,7 @@ const QuestionAnswer = ({navigation}) => {
       }
     
       function reset() {
-        setSeconds(60);
+      
         setIsActive(false);
       }
     
@@ -83,6 +83,7 @@ const QuestionAnswer = ({navigation}) => {
                 dispatch(GeneralAction.setQuizScore(score-10));
                 handleNext  () 
                 reset()
+                setSeconds(60);
                 setIsActive(true);
              }
           
@@ -120,7 +121,7 @@ const QuestionAnswer = ({navigation}) => {
          
             toggle() ;
             setIsActive(true);
-            setSeconds(0);
+            setSeconds(60);
 
 
             setCurrentQuestionIndex(currentQuestionIndex + 1);
