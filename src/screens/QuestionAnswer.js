@@ -27,7 +27,7 @@ const QuestionAnswer = ({navigation}) => {
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
     const [correctOption, setCorrectOption] = useState(null);
     const [isOptionsDisabled, setIsOptionsDisabled] = useState(false);
-    // const [score, setScore] = useState(0)
+ 
     const [showNextButton, setShowNextButton] = useState(false);
     const [showActivityIndicator,setShowActivityIndicator ] = useState(true);
 
@@ -42,16 +42,6 @@ const QuestionAnswer = ({navigation}) => {
 
    };
 
-    
-    // useEffect(() => {
-     
-    //      setIsActive(true);
-    //     dispatch(GeneralAction.do_Quiz(question));
-    //     setData(question)
-    //   setShowActivityIndicator(false);
-
-    //  }, []);
- 
 
     const validateAnswer = () => {
          setIsOptionsDisabled(true);
@@ -143,7 +133,7 @@ const renderOptions = () => {
                     onPress={() => validateAnswer()}
                     disabled={isOptionsDisabled} >
                     <Text style={styles.buttontext}>{allQuestions[currentQuestionIndex]?.correct_answer.
-                    replace(/&quot;/g, '"').replace(/["']/g, "" ).replace(/&ldquo;/g, "").replace( /&rdquo;/g, "").replace( /&#039;/g, "'")}</Text>
+                    replace(/&quot;/g, '"').replace(/["']/g, "" ).replace(/&ldquo;/g, " ").replace( /&rdquo;/g, "").replace( /&#039;/g, "'")}</Text>
 
                 </TouchableOpacity>
                 {
@@ -209,7 +199,7 @@ const renderOptions = () => {
 
                         <Text style={styles.questText}>{allQuestions[currentQuestionIndex]?.question.
 
-                        replace(/&quot;/g, '"').replace(/["']/g, "" ).replace(/&ldquo;/g, "").replace( /&rdquo;/g, "").replace(/&#039;/g, "'")}</Text>
+                        replace(/&quot;/g, '"').replace(/["']/g, "" ).replace(/&ldquo;/g, "").replace( /&rdquo;/g, "").replace(/&#039;/g, "'").replace(/&eacute;/g, "'")}</Text>
                        
                          
                      
