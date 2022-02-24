@@ -17,13 +17,11 @@ const QuestionAnswer = ({navigation}) => {
     const dispatch = useDispatch();
 
     const [Userdata, setData] = useState([]);
-
- 
     const allQuestions = Userdata;
     
 
 
-    const [seconds, setSeconds] = useState(60);
+    const [seconds, setSeconds] = useState(0);
     const [isActive, setIsActive] = useState(true);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -67,7 +65,7 @@ const QuestionAnswer = ({navigation}) => {
       }
     
       function reset() {
-        setSeconds(60);
+        setSeconds(0);
         setIsActive(false);
       }
     
@@ -76,17 +74,16 @@ const QuestionAnswer = ({navigation}) => {
      
         if (isActive) {
           interval = setInterval(() => {
-            setSeconds(seconds => seconds - 1);
+            setSeconds(seconds => seconds + 1);
 
 
-            if(seconds == 0)
+            if(seconds==60)
              {
  
                 dispatch(GeneralAction.setQuizScore(score-10));
                 handleNext  () 
                 reset()
                 setIsActive(true);
-                
              }
           
           }, 1000);
@@ -123,7 +120,7 @@ const QuestionAnswer = ({navigation}) => {
          
             toggle() ;
             setIsActive(true);
-            setSeconds(60);
+            setSeconds(0);
 
 
             setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -144,7 +141,8 @@ const renderOptions = () => {
     <TouchableOpacity style={styles.button}
                     onPress={() => validateAnswer()}
                     disabled={isOptionsDisabled} >
-                    <Text style={styles.buttontext}>{allQuestions[currentQuestionIndex]?.correct_answer.replace(/&quot;/g, '"',/["']/g, "")} </Text>
+                    <Text style={styles.buttontext}>{allQuestions[currentQuestionIndex]?.correct_answer.
+                    replace(/&quot;/g, '"').replace(/["']/g, "" ).replace(/&ldquo;/g, "").replace( /&rdquo;/g, "").replace( /&#039;/g, "'")}</Text>
 
                 </TouchableOpacity>
                 {
@@ -154,7 +152,8 @@ const renderOptions = () => {
                             disabled={isOptionsDisabled}
                             key={incorrect_answers}
                              style={styles.button}>
-                            <Text style={styles.buttontext}>{incorrect_answers.replace(/&quot;/g, '"',/["']/g, "")}</Text>
+                            <Text style={styles.buttontext}>{incorrect_answers.
+                      replace(/&quot;/g, '"').replace(/["']/g, "" ).replace(/&ldquo;/g, "").replace( /&rdquo;/g, "").replace( /&#039;/g, "'")}</Text>
                        </TouchableOpacity>
                     ))
                 }
@@ -207,7 +206,9 @@ const renderOptions = () => {
 
                         <Text> {allQuestions[currentQuestionIndex]?.category}</Text>
 
-                        <Text style={styles.questText}>{allQuestions[currentQuestionIndex]?.question.replace(/&quot;/g, '"',/["']/g, "")}</Text>
+                        <Text style={styles.questText}>{allQuestions[currentQuestionIndex]?.question.
+
+                        replace(/&quot;/g, '"').replace(/["']/g, "" ).replace(/&ldquo;/g, "").replace( /&rdquo;/g, "").replace(/&#039;/g, "'")}</Text>
                        
                          
                      
