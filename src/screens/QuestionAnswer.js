@@ -21,7 +21,7 @@ const QuestionAnswer = ({navigation}) => {
     
 
 
-    const [seconds, setSeconds] = useState(0);
+    const [seconds, setSeconds] = useState(60);
     const [isActive, setIsActive] = useState(true);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -65,7 +65,7 @@ const QuestionAnswer = ({navigation}) => {
       }
     
       function reset() {
-        setSeconds(0);
+        setSeconds(60);
         setIsActive(false);
       }
     
@@ -74,10 +74,10 @@ const QuestionAnswer = ({navigation}) => {
      
         if (isActive) {
           interval = setInterval(() => {
-            setSeconds(seconds => seconds + 1);
+            setSeconds(seconds => seconds - 1);
 
 
-            if(seconds==60)
+            if(seconds==0)
              {
  
                 dispatch(GeneralAction.setQuizScore(score-10));
