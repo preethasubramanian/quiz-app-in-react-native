@@ -32,17 +32,7 @@ const QuestionAnswer = ({ navigation }) => {
     const [showActivityIndicator, setShowActivityIndicator] = useState(true);
 
 
-    //mounted
-    useEffect(() => handleComponentMounted(), []);
-
-    const handleComponentMounted = () => {
-
-
-
-    };
-
-
-    const validateAnswer = () => {
+  const validateAnswer = () => {
         setIsOptionsDisabled(true);
         dispatch(GeneralAction.setQuizScore(score + 10));
         setShowNextButton(true)
