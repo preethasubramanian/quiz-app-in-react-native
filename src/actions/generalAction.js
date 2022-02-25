@@ -10,9 +10,9 @@ const types = {
 // GET NOTE
 export const do_Quiz = () => (dispatch) =>  {
   const instance = axios.create({
-    baseURL: "https://opentdb.com/api.php?amount=10",
+    baseURL: "https://opentdb.com",
   });
-  instance.get()
+  instance.get("api.php?amount=10")
       .then(res => {
     
           dispatch({

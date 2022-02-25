@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Modal, StatusBar ,ActivityIndicator } from "react-native";
+import { View, Text, Image, StyleSheet, Modal, StatusBar, ActivityIndicator } from "react-native";
 import Colors from "../contants/Colors";
 import Images from "../contants/Images";
 import Fonts from "../contants/fonts";
@@ -9,16 +9,16 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { BackHandler } from 'react-native';
 import GeneralAction from '../actions/generalAction';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-const QuestionAnswer = ({navigation}) => {
-    const score= useSelector(state => state?.generalState?.score);
-    const question= useSelector(state => state?.generalState?.question);
+const QuestionAnswer = ({ navigation }) => {
+    const score = useSelector(state => state?.generalState?.score);
+    const question = useSelector(state => state?.generalState?.question);
     const dispatch = useDispatch();
 
     const [Userdata, setData] = useState([]);
     const allQuestions = Userdata;
-    
+
 
 
     const [seconds, setSeconds] = useState(60);
@@ -27,89 +27,95 @@ const QuestionAnswer = ({navigation}) => {
     const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
     const [correctOption, setCorrectOption] = useState(null);
     const [isOptionsDisabled, setIsOptionsDisabled] = useState(false);
- 
+
     const [showNextButton, setShowNextButton] = useState(false);
-    const [showActivityIndicator,setShowActivityIndicator ] = useState(true);
+    const [showActivityIndicator, setShowActivityIndicator] = useState(true);
 
-   //mounted
-   useEffect(() => handleComponentMounted(), []);
 
-   const handleComponentMounted = () => {
-    setIsActive(true);
-    dispatch(GeneralAction.do_Quiz(question));
-    setData(question)
-    setShowActivityIndicator(false);
+    //mounted
+    useEffect(() => handleComponentMounted(), []);
 
-   };
+    const handleComponentMounted = () => {
+
+
+
+    };
 
 
     const validateAnswer = () => {
-         setIsOptionsDisabled(true);
-          dispatch(GeneralAction.setQuizScore(score+10));
-          setShowNextButton(true)
-         handleNext()
+        setIsOptionsDisabled(true);
+        dispatch(GeneralAction.setQuizScore(score + 10));
+        setShowNextButton(true)
+        handleNext()
     }
 
     function toggle() {
         setIsActive(!isActive);
-      }
-    
-      function reset() {
-      
+    }
+
+    function reset() {
+
         setIsActive(false);
-      }
-    
-      useEffect(() => {
+    }
+
+    useEffect(() => {
         let interval = null;
-     
+
+        if (question == [])
+            dispatch(GeneralAction.do_Quiz(question));
+        setData(question)
+
+        if (question != []) {
+            setShowActivityIndicator(false)
+        }
+
         if (isActive) {
-          interval = setInterval(() => {
-            setSeconds(seconds => seconds - 1);
+            interval = setInterval(() => {
+                setSeconds(seconds => seconds - 1);
 
 
-            if(seconds==0)
-             {
- 
-                dispatch(GeneralAction.setQuizScore(score-10));
-                handleNext  () 
-                reset()
-                setSeconds(60);
-                setIsActive(true);
-             }
-          
-          }, 1000);
-        
-        } else if (!isActive && seconds !== 0 ) {
-          clearInterval(interval);
+                if (seconds == 0) {
+
+                    dispatch(GeneralAction.setQuizScore(score - 10));
+                    handleNext()
+                    reset()
+                    setSeconds(60);
+                    setIsActive(true);
+                }
+
+            }, 2000);
+
+        } else if (!isActive && seconds !== 0) {
+            clearInterval(interval);
         }
         return () => clearInterval(interval);
-      }, [isActive, seconds]);
+    }, [isActive, seconds]);
 
-  
-  
-      const InCorrectAnswer = () => {
+
+
+    const InCorrectAnswer = () => {
 
         setIsOptionsDisabled(true);
         // setScore(score - 10)
-         dispatch(GeneralAction.setQuizScore(score-10));
-         setShowNextButton(true)
-         handleNext()
+        dispatch(GeneralAction.setQuizScore(score - 10));
+        setShowNextButton(true)
+        handleNext()
     }
-   
-     
+
+
 
 
     const handleNext = () => {
-      
-     
+
+
         if (currentQuestionIndex == allQuestions.length - 1) {
-         //    setShowScoreModal(true)
-             navigation.navigate('ScoreCard');
+            //    setShowScoreModal(true)
+            navigation.navigate('ScoreCard');
 
 
-            } else {
-         
-            toggle() ;
+        } else {
+
+            toggle();
             setIsActive(true);
             setSeconds(60);
 
@@ -122,30 +128,30 @@ const QuestionAnswer = ({navigation}) => {
         }
 
     }
-  
 
-   
 
-const renderOptions = () => {
+
+
+    const renderOptions = () => {
         return (
-     <View>
-    <TouchableOpacity style={styles.button}
+            <View>
+                <TouchableOpacity style={styles.button}
                     onPress={() => validateAnswer()}
                     disabled={isOptionsDisabled} >
                     <Text style={styles.buttontext}>{allQuestions[currentQuestionIndex]?.correct_answer.
-                    replace(/&quot;/g, '"').replace(/["']/g, "" ).replace(/&ldquo;/g, " ").replace( /&rdquo;/g, "").replace( /&#039;/g, "'")}</Text>
+                        replace(/&quot;/g, '"').replace(/["']/g, "").replace(/&ldquo;/g, " ").replace(/&rdquo;/g, "").replace(/&#039;/g, "'")}</Text>
 
                 </TouchableOpacity>
                 {
                     allQuestions[currentQuestionIndex]?.incorrect_answers.map(incorrect_answers => (
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             onPress={() => InCorrectAnswer()}
                             disabled={isOptionsDisabled}
                             key={incorrect_answers}
-                             style={styles.button}>
+                            style={styles.button}>
                             <Text style={styles.buttontext}>{incorrect_answers.
-                      replace(/&quot;/g, '"').replace(/["']/g, "" ).replace(/&ldquo;/g, "").replace( /&rdquo;/g, "").replace( /&#039;/g, "'")}</Text>
-                       </TouchableOpacity>
+                                replace(/&quot;/g, '"').replace(/["']/g, "").replace(/&ldquo;/g, "").replace(/&rdquo;/g, "").replace(/&#039;/g, "'")}</Text>
+                        </TouchableOpacity>
                     ))
                 }
             </View>
@@ -156,7 +162,7 @@ const renderOptions = () => {
 
 
     return (
-      
+
 
         <View style={styles.container}>
             <StatusBar barStyle="light-content"
@@ -168,7 +174,7 @@ const renderOptions = () => {
             <View style={styles.borderRadiusSecond}>
                 <View style={styles.borderRadius}>
                     <View style={styles.borderRadiusThird}>
-                  
+
 
                         <View style={styles.topView}>
                             <Text style={styles.questNoText}> {currentQuestionIndex + 1}/ {allQuestions.length}</Text>
@@ -176,44 +182,44 @@ const renderOptions = () => {
                         </View>
                         <View>
 
-                      
+
                             <TouchableOpacity style={styles.Text}
                             >
                                 <Text style={styles.scoreText}>{seconds}</Text>
 
                             </TouchableOpacity>
                         </View>
-                        <Modal
-                        
-                               transparent={true}
-                                visible={showActivityIndicator}
-                            >
-                        <ActivityIndicator   
-                      
-                        size= "small" color= "#F2994A" style ={styles.loadingIndicator} />
-                     
-                        </Modal>
+
 
 
                         <Text> {allQuestions[currentQuestionIndex]?.category}</Text>
 
                         <Text style={styles.questText}>{allQuestions[currentQuestionIndex]?.question.
 
-                        replace(/&quot;/g, '"').replace(/["']/g, "" ).replace(/&ldquo;/g, "").replace( /&rdquo;/g, "").replace(/&#039;/g, "'").replace(/&eacute;/g, "'")}</Text>
-                       
-                         
-                     
+                            replace(/&quot;/g, '"').replace(/["']/g, "").replace(/&ldquo;/g, "").replace(/&rdquo;/g, "").replace(/&#039;/g, "'").replace(/&eacute;/g, "'")}</Text>
+
+
                         {renderOptions()}
 
+                        <Modal
+
+                            transparent={true}
+                            visible={showActivityIndicator}
+                        >
+                            <ActivityIndicator
+
+                                size="large" color="#F2994A" style={styles.loadingIndicator} />
+
+                        </Modal>
 
 
                     </View>
                 </View>
             </View>
- 
-          
 
-         
+
+
+
         </View>
 
 
@@ -239,15 +245,15 @@ const styles = StyleSheet.create(
             textAlign: 'center',
             fontFamily: Fonts.Nunito_Bold,
             fontSize: 15,
-            
+
 
         },
-        loadingIndicator:{
+        loadingIndicator: {
             justifyContent: 'center',
             alignItems: 'center',
             textAlign: 'center',
             marginBottom: 230,
-            marginTop:250,
+            marginTop: 375,
 
         },
         TitleText: {
@@ -373,12 +379,12 @@ const styles = StyleSheet.create(
 
             justifyContent: 'center', borderColor: Colors.BLACK, borderRadius: 100, borderWidth: 1,
             marginTop: 15,
-          
+
             height: 45,
 
             justifyContent: 'center',
             alignItems: 'center',
-            width:250
+            width: 250
 
         },
 
@@ -399,4 +405,4 @@ const styles = StyleSheet.create(
 //       setScore: score => dispatch(ScoreAction.setIsQuizScore(score)),
 //     };
 //   };
-export default  QuestionAnswer;
+export default QuestionAnswer;
