@@ -188,9 +188,39 @@ const QuestionAnswer = ({ navigation }) => {
 
                             replace(/&quot;/g, '"').replace(/["']/g, "").replace(/&ldquo;/g, "").replace(/&rdquo;/g, "").replace(/&#039;/g, "'").replace(/&eacute;/g, "'")}</Text>
 
+{/* 
+                   {renderOptions()} */}
 
-                        {renderOptions()}
+               
+<View>
+                <TouchableOpacity style={styles.button}
+                    onPress={() => validateAnswer()}
+                    disabled={isOptionsDisabled} >
+                    <Text style={styles.buttontext}>{allQuestions[currentQuestionIndex]?.correct_answer.
+                        replace(/&quot;/g, '"').replace(/["']/g, "").replace(/&ldquo;/g, " ").replace(/&rdquo;/g, "").replace(/&#039;/g, "'")}</Text>
 
+                </TouchableOpacity>
+                {
+                    allQuestions[currentQuestionIndex]?.incorrect_answers.map(incorrect_answers => (
+                        <TouchableOpacity
+                            onPress={() => InCorrectAnswer()}
+                            disabled={isOptionsDisabled}
+                            key={incorrect_answers}
+                            style={styles.button}>
+                            <Text style={styles.buttontext}>{incorrect_answers.
+                                replace(/&quot;/g, '"').replace(/["']/g, "").replace(/&ldquo;/g, "").replace(/&rdquo;/g, "").replace(/&#039;/g, "'")}</Text>
+                        </TouchableOpacity>
+                    ))
+                }
+            </View>
+               
+               
+               
+               
+               
+               
+               
+               
                         <Modal
 
                             transparent={true}

@@ -10,12 +10,17 @@ import Display from '../utils/Display';
 import GeneralAction from '../actions/generalAction';
 import { useSelector, useDispatch } from 'react-redux';
 const ScoreCard = ({ navigation }) => {
-   const score = useSelector(state => state?.generalState?.score);
+    const score = useSelector(state => state?.generalState?.score);
     const dispatch = useDispatch();
+
+    console.log(Math.sign(-score));
     const resetScore = () => {
-       dispatch(GeneralAction.setQuizScore(0));
-     }
- return (
+        dispatch(GeneralAction.setQuizScore(0));
+    }
+
+
+
+    return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content"
                 backgroundColor={Colors.PRIMARY_COLOR}
@@ -27,10 +32,8 @@ const ScoreCard = ({ navigation }) => {
 
                     <Text style={styles.containerText}>congratulation </Text>
                     <Text style={styles.TitleText}>You won with</Text>
-                    {/* <Text style={styles.TitleText}>{score}</Text> */}
-
-                    <Text style={styles.scoreText}> {score} </Text>
-                   <Text style={styles.TitleText}>Score </Text> 
+                    <Text style={styles.scoreText}> {score > 0 ? score : 'You Failed'}</Text>
+                    <Text style={styles.TitleText}>  Score  </Text>
                     <Image source={Images.IMAGETOP} resizeMode="contain" style={styles.imageLeft} />
 
 
@@ -47,7 +50,7 @@ const ScoreCard = ({ navigation }) => {
 
 
                     >
-                        <Text style={styles.buttontext}>Continue Playing </Text>
+                        <Text style={styles.buttontext}>Try again </Text>
 
                     </TouchableOpacity>
                 </View>
@@ -84,7 +87,7 @@ const styles = StyleSheet.create(
             color: Colors.BLACK,
             textAlign: 'center',
             fontFamily: Fonts.Nunito_ExtraBold,
-            fontSize: 25   ,
+            fontSize: 25,
             fontWeight: "bold",
 
         },
@@ -113,23 +116,26 @@ const styles = StyleSheet.create(
         },
         button:
         {
-            borderRadius: 18,
-            backgroundColor: Colors.GRAY,
-            paddingRight: 20,
-            paddingLeft: 20,
-            marginBottom: 30,
-            padding: 10,
-            height: 40
+            borderRadius:25,
+            backgroundColor:Colors.WHITE,
+           marginBottom:50,
+           paddingRight:70,
+           paddingLeft:70,
+           paddingBottom:10,
+           padding:10,
+            height:50,
+            elevation:5,
+            fontSize: 25,
 
         },
         buttontext: {
 
             fontFamily: Fonts.Nunito_back,
             textAlign: 'center',
-            fontSize: 15,
+            fontSize: 20,
             color: Colors.BLACK,
             height: Display.setHeight(35),
-            elevation:6,
+            elevation: 6,
         },
         image:
         {
