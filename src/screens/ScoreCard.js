@@ -30,7 +30,7 @@ const ScoreCard = ({ navigation }) => {
 
                 <View style={styles.views}>
 
-                    <Text style={styles.containerText}>congratulation </Text>
+                    <Text style={styles.containerText}>{score > 0 ? 'congratulation' : ''} </Text>
                     <Text style={styles.TitleText}>{score > 0 ? ' You won with' : 'You Failed'}</Text>
                     <Text style={styles.scoreText}>{score} </Text>
                     <Text style={styles.TitleText}>  Score  </Text>
