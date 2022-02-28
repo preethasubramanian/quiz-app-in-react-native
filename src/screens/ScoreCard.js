@@ -31,8 +31,8 @@ const ScoreCard = ({ navigation }) => {
                 <View style={styles.views}>
 
                     <Text style={styles.containerText}>congratulation </Text>
-                    <Text style={styles.TitleText}>You won with</Text>
-                    <Text style={styles.scoreText}> {score > 0 ? score : 'You Failed'}</Text>
+                    <Text style={styles.TitleText}>{score > 0 ? ' You won with' : 'You Failed'}</Text>
+                    <Text style={styles.scoreText}>{score} </Text>
                     <Text style={styles.TitleText}>  Score  </Text>
                     <Image source={Images.IMAGETOP} resizeMode="contain" style={styles.imageLeft} />
 
@@ -73,6 +73,7 @@ const styles = StyleSheet.create(
         },
 
         containerText: {
+            top: 10,
             textAlign: 'center',
             fontFamily: Fonts.Nunito_Bold,
             fontSize: 15,
@@ -84,6 +85,7 @@ const styles = StyleSheet.create(
 
 
         TitleText: {
+            top: 5,
             color: Colors.BLACK,
             textAlign: 'center',
             fontFamily: Fonts.Nunito_ExtraBold,
@@ -142,7 +144,7 @@ const styles = StyleSheet.create(
 
             resizeMode: "contain",
             position: "absolute",
-            left: 1,
+            left: 5,
             top: 8,
             bottom: 35,
             height: Display.setHeight(35),
@@ -154,8 +156,8 @@ const styles = StyleSheet.create(
 
             resizeMode: "contain",
             position: "absolute",
-            right: 1,
-            top: 15,
+            left: 55,
+            top: .1,
 
             height: Display.setHeight(30),
             width: Display.setWidth(12),
