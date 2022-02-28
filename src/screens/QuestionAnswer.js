@@ -28,15 +28,31 @@ const QuestionAnswer = ({ navigation }) => {
     const [correctOption, setCorrectOption] = useState(null);
     const [isOptionsDisabled, setIsOptionsDisabled] = useState(false);
 
+<<<<<<< HEAD
     const [showNextButton, setShowNextButton] = useState(false);
     const [showActivityIndicator, setShowActivityIndicator] = useState(true);
+=======
+     
+>>>>>>> master
 
 
+<<<<<<< HEAD
   const validateAnswer = () => {
         setIsOptionsDisabled(true);
         dispatch(GeneralAction.setQuizScore(score + 10));
         setShowNextButton(true)
         handleNext()
+=======
+      
+    }, []);
+ 
+
+    const validateAnswer = () => {
+         setIsOptionsDisabled(true);
+          dispatch(GeneralAction.setQuizScore(score+10));
+          setShowNextButton(true)
+         handleNext()
+>>>>>>> master
     }
 
     function toggle() {
@@ -425,4 +441,8 @@ const styles = StyleSheet.create(
 //       setScore: score => dispatch(ScoreAction.setIsQuizScore(score)),
 //     };
 //   };
+<<<<<<< HEAD
 export default QuestionAnswer;
+=======
+export default  QuestionAnswer;
+>>>>>>> master
